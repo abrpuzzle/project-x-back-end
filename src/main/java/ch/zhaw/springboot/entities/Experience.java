@@ -1,24 +1,37 @@
 package ch.zhaw.springboot.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Entity
+@Entity (name = "Experience")
+@Table (name = "experience")
 public class Experience {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@GeneratedValue
+	private Long id;
 
-	private long date;
+	private Long date;
 
-	@ManyToOne
-	@JoinColumn(name = "tourist_id", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+
 	private Tourist tourist;
+	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Experience )) return false;
+        return id != null && id.equals(((Experience) o).getId());
+    }
+ 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
 	public Experience() {
 		// TODO Auto-generated constructor stub

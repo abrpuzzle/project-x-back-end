@@ -1,22 +1,44 @@
 package ch.zhaw.springboot.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity
+@Entity(name = "Tourist")
+@Table(name = "tourist")
 public class Tourist {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	@GeneratedValue
+	private Long id;
 
 	private String name;
 	private String email;
+    
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+        )
+        private List<Experience> experiences = new ArrayList<>();
+    
+    public void addExperience(Experience experience) {
+    	experiences.add(experience);
+    	experience.setTourist(this);
+    }
+ 
+    public void removeExperience(Experience experience) {
+    	experiences.remove(experience);
+    	experience.setTourist(null);
+    }
 
 	public Tourist() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public long getId() {

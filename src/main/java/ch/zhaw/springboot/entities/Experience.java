@@ -57,5 +57,9 @@ public class Experience {
 	public void setDate(long date) {
 		this.date = date;
 	}
+	
+	public void setTourist(Tourist tourist) {
+		this.tourist = tourist;
+	}
 
 }

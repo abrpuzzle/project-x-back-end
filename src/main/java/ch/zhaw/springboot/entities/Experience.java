@@ -7,34 +7,34 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity (name = "Experience")
-@Table (name = "experience")
+@Entity(name = "Experience")
+@Table(name = "experience")
 public class Experience {
 
 	@Id
 	@GeneratedValue
 	private Long id;
-
 	private Long date;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-
 	private Tourist tourist;
-	
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Experience )) return false;
-        return id != null && id.equals(((Experience) o).getId());
-    }
- 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Experience))
+			return false;
+		return id != null && id.equals(((Experience) o).getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
+	}
 
 	public Experience() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Experience(long id, long date) {
@@ -57,7 +57,7 @@ public class Experience {
 	public void setDate(long date) {
 		this.date = date;
 	}
-	
+
 	public void setTourist(Tourist tourist) {
 		this.tourist = tourist;
 	}

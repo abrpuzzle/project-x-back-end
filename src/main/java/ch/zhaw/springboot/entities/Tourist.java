@@ -1,31 +1,24 @@
 package ch.zhaw.springboot.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Tourist {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 
 	private String name;
 	private String email;
 
-	@OneToMany(targetEntity = Experience.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tourist")
-
-	private List<Experience> experiences = new ArrayList<>();
+	public Tourist(String name, String email) {
+		this.name = name;
+		this.email = email;
+	}
 
 	public Tourist() {
 	}
@@ -54,18 +47,5 @@ public class Tourist {
 		this.email = email;
 	}
 
-	public List<Experience> getExperience() {
-		return this.experiences;
-	}
-
-	public void addExperience(Experience experience) {
-		experiences.add(experience);
-		experience.setTourist(this);
-	}
-
-	public void removeExperience(Experience experience) {
-		experiences.remove(experience);
-		experience.setTourist(null);
-	}
 
 }

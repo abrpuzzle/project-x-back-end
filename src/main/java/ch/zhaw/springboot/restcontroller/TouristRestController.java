@@ -33,7 +33,7 @@ public class TouristRestController {
 	}
 
 	@GetMapping("projectx/tourist/{id}")
-	public ResponseEntity<Tourist> getTouristById(@PathVariable("id") Long id) {
+	public ResponseEntity<Tourist> getTouristById(@PathVariable("id") long id) {
 		Optional<Tourist> result = this.repository.findById(id);
 
 		if (result.isPresent()) {
@@ -43,14 +43,21 @@ public class TouristRestController {
 		}
 	}
 
-//	@PostMapping
+//	@PostMapping("projectx/tourist/")
 //	public ResponseEntity<Tourist> addTourist(@RequestBody Tourist tourist) {
 //		repository.save(tourist);
 //		return new ResponseEntity<>(HttpStatus.CREATED);
 //	}
+	
+	@PostMapping("projectx/tourist")
+	public ResponseEntity<Tourist> createTourist(@RequestBody Tourist tourist) {
+		Tourist result = this.repository.save(tourist);
+		return new ResponseEntity<Tourist>(result, HttpStatus.OK);
+	}
+
 
 	@DeleteMapping("projectx/tourist/{id}")
-	void deleteTourist(@PathVariable Long id) {
+	void deleteTourist(@PathVariable long id) {
 		repository.deleteById(id);
 	}
 }

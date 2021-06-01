@@ -19,22 +19,11 @@ public class Experience {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Tourist tourist;
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Experience))
-			return false;
-		return id != null && id.equals(((Experience) o).getId());
-	}
-
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Trip trip;
 
 	public Experience() {
-		
+
 	}
 
 	public Experience(long id, long date) {
@@ -60,6 +49,24 @@ public class Experience {
 
 	public void setTourist(Tourist tourist) {
 		this.tourist = tourist;
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Experience))
+			return false;
+		return id != null && id.equals(((Experience) o).getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode();
 	}
 
 }

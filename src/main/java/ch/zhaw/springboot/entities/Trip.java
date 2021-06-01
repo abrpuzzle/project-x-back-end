@@ -1,7 +1,9 @@
 package ch.zhaw.springboot.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import javax.persistence.Table;
 
 @Table(name = "trip")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@Entity
+@Entity(name = "Trip")
 public class Trip {
 
 	@Id
@@ -25,9 +27,8 @@ public class Trip {
 	@Column(name = "city")
 	private String city;
 
-	@OneToMany
-	@JoinColumn(name = "trip_id")
-	private List<Experience> experience;
+	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Experience> experiences = new ArrayList<>();
 
 	@OneToMany
 	@JoinColumn(name = "trip_id")
@@ -57,20 +58,22 @@ public class Trip {
 		this.city = city;
 	}
 
-	public List<Experience> getExperience() {
-		return experience;
-	}
-
-	public void setExperience(List<Experience> experience) {
-		this.experience = experience;
-	}
-
 	public List<Route> getRoute() {
 		return route;
 	}
 
 	public void setRoute(List<Route> route) {
 		this.route = route;
+	}
+
+	public void addExperience(Experience experience) {
+		experiences.add(experience);
+		experience.setTrip(this);
+	}
+
+	public void removeExperience(Experience experience) {
+		experiences.remove(experience);
+		experience.setTrip(null);
 	}
 
 }

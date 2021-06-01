@@ -20,22 +20,9 @@ public class Tourist {
 
 	private String name;
 	private String email;
-    
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-        )
-        private List<Experience> experiences = new ArrayList<>();
-    
-    public void addExperience(Experience experience) {
-    	experiences.add(experience);
-    	experience.setTourist(this);
-    }
- 
-    public void removeExperience(Experience experience) {
-    	experiences.remove(experience);
-    	experience.setTourist(null);
-    }
+
+	@OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Experience> experiences = new ArrayList<>();
 
 	public Tourist() {
 
@@ -63,6 +50,16 @@ public class Tourist {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void addExperience(Experience experience) {
+		experiences.add(experience);
+		experience.setTourist(this);
+	}
+
+	public void removeExperience(Experience experience) {
+		experiences.remove(experience);
+		experience.setTourist(null);
 	}
 
 }

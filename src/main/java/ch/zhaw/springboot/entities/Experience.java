@@ -55,13 +55,16 @@ public class Experience {
 		this.tourist = tourist;
 	}
 
-	public void setTrip(Trip trip) {
-		this.trip = trip;
+	public Trip getTrip() {
+		return this.trip;
 	}
 
 	public Tourist getTourist() {
 		return this.tourist;
 	}
 
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
 
 }

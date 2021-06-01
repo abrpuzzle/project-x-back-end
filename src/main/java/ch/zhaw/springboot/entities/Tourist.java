@@ -27,10 +27,6 @@ public class Tourist {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -46,6 +42,5 @@ public class Tourist {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 }

@@ -42,12 +42,6 @@ public class TouristRestController {
 			return new ResponseEntity<Tourist>(HttpStatus.NOT_FOUND);
 		}
 	}
-
-//	@PostMapping("projectx/tourist/")
-//	public ResponseEntity<Tourist> addTourist(@RequestBody Tourist tourist) {
-//		repository.save(tourist);
-//		return new ResponseEntity<>(HttpStatus.CREATED);
-//	}
 	
 	@PostMapping("projectx/tourist")
 	public ResponseEntity<Tourist> createTourist(@RequestBody Tourist tourist) {

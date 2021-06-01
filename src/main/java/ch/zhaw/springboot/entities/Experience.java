@@ -15,7 +15,7 @@ public class Experience {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Long date;
+	private String date;
 
 	@ManyToOne(targetEntity=Tourist.class, fetch = FetchType.LAZY)
 	private Tourist tourist;
@@ -27,7 +27,7 @@ public class Experience {
 
 	}
 
-	public Experience(long id, long date) {
+	public Experience(long id, String date) {
 		this.id = id;
 		this.date = date;
 	}
@@ -40,11 +40,11 @@ public class Experience {
 		this.id = id;
 	}
 
-	public long getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(long date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

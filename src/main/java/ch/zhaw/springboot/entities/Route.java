@@ -2,6 +2,9 @@ package ch.zhaw.springboot.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name = "Route")
@@ -14,6 +17,10 @@ public class Route extends Trip {
 	public Route() {
 		super();
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "trip_id")
+	private Trip trip;
 
 	public Route(String name, int length) {
 		super(name);

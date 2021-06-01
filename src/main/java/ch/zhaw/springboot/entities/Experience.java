@@ -5,11 +5,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
-@Entity(name = "Experience")
-@Table(name = "experience")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
 public class Experience {
 
 	@Id
@@ -17,10 +19,14 @@ public class Experience {
 	private Long id;
 	private String date;
 
-	@ManyToOne(targetEntity=Tourist.class, fetch = FetchType.LAZY)
+	@JsonIgnore
+	@ManyToOne(targetEntity = Tourist.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "touristId")
 	private Tourist tourist;
 
-	@ManyToOne(targetEntity=Trip.class, fetch = FetchType.LAZY)
+	@JsonIgnore
+	@ManyToOne(targetEntity = Trip.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "tripId")
 	private Trip trip;
 
 	public Experience() {
@@ -51,9 +57,13 @@ public class Experience {
 	public void setTourist(Tourist tourist) {
 		this.tourist = tourist;
 	}
-	
+
 	public void setTrip(Trip trip) {
 		this.trip = trip;
+	}
+
+	public Tourist getTourist() {
+		return this.tourist;
 	}
 
 	@Override

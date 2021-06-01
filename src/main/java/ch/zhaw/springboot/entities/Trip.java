@@ -27,7 +27,7 @@ public class Trip {
 	@Column(name = "city")
 	private String city;
 
-	@OneToMany(targetEntity = Experience.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(targetEntity = Experience.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "trip")
 	private List<Experience> experiences = new ArrayList<>();
 
 	public Trip(String city) {
@@ -52,6 +52,10 @@ public class Trip {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+	
+	public List<Experience> getExperience() {
+		return this.experiences;
 	}
 
 	public void addExperience(Experience experience) {

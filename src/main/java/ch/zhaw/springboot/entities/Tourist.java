@@ -10,10 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
-@Entity(name = "Tourist")
-@Table(name = "tourist")
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@Entity
 public class Tourist {
 
 	@Id
@@ -23,7 +23,8 @@ public class Tourist {
 	private String name;
 	private String email;
 
-	@OneToMany(targetEntity = Experience.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+	@OneToMany(targetEntity = Experience.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "tourist")
+
 	private List<Experience> experiences = new ArrayList<>();
 
 	public Tourist() {
@@ -51,6 +52,10 @@ public class Tourist {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Experience> getExperience() {
+		return this.experiences;
 	}
 
 	public void addExperience(Experience experience) {

@@ -1,10 +1,13 @@
 package ch.zhaw.springboot.restcontroller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.zhaw.springboot.entities.Experience;
@@ -24,6 +27,17 @@ public class ExperienceRestController {
 			return ResponseEntity.ok(result);
 		} else {
 			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@GetMapping("projectx/experience/{id}")
+	public ResponseEntity<Experience> getExperienceById(@PathVariable("id") Long id) {
+		Optional<Experience> result = this.repository.findById(id);
+
+		if (result.isPresent()) {
+			return new ResponseEntity<Experience>(result.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Experience>(HttpStatus.NOT_FOUND);
 		}
 	}
 

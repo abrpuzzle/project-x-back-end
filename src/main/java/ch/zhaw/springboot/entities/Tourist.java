@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,17 +17,16 @@ import javax.persistence.Table;
 public class Tourist {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	private String name;
 	private String email;
 
-	@OneToMany(mappedBy = "tourist", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(targetEntity = Experience.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Experience> experiences = new ArrayList<>();
 
 	public Tourist() {
-
 	}
 
 	public long getId() {

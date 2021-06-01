@@ -6,17 +6,17 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-@Table(name = "trip")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Table(name = "trip")
 @Entity(name = "Trip")
 public class Trip {
 
@@ -27,19 +27,15 @@ public class Trip {
 	@Column(name = "city")
 	private String city;
 
-	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(targetEntity = Experience.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Experience> experiences = new ArrayList<>();
-
-	@OneToMany
-	@JoinColumn(name = "trip_id")
-	private List<Route> route;
 
 	public Trip(String city) {
 		this.city = city;
 	}
 
 	public Trip() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public long getId() {
@@ -56,14 +52,6 @@ public class Trip {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public List<Route> getRoute() {
-		return route;
-	}
-
-	public void setRoute(List<Route> route) {
-		this.route = route;
 	}
 
 	public void addExperience(Experience experience) {

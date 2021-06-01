@@ -3,6 +3,7 @@ package ch.zhaw.springboot.entities;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -12,14 +13,14 @@ import javax.persistence.Table;
 public class Experience {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private Long date;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity=Tourist.class, fetch = FetchType.LAZY)
 	private Tourist tourist;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity=Trip.class, fetch = FetchType.LAZY)
 	private Trip trip;
 
 	public Experience() {
@@ -50,7 +51,7 @@ public class Experience {
 	public void setTourist(Tourist tourist) {
 		this.tourist = tourist;
 	}
-
+	
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}

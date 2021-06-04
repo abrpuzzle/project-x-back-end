@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +18,13 @@ import ch.zhaw.springboot.entities.Tourist;
 import ch.zhaw.springboot.repositories.TouristRepository;
 
 @RestController
+@CrossOrigin
 public class TouristRestController {
 	@Autowired
 	private TouristRepository repository;
 
-	@GetMapping("projectx/tourist")
-	public ResponseEntity<List<Tourist>> getTourist() {
+	@GetMapping("projectx/tourists")
+	public ResponseEntity<List<Tourist>> getTourists() {
 		List<Tourist> result = this.repository.findAll();
 
 		if (!result.isEmpty()) {
@@ -32,7 +34,7 @@ public class TouristRestController {
 		}
 	}
 
-	@GetMapping("projectx/tourist/{id}")
+	@GetMapping("projectx/tourists/{id}")
 	public ResponseEntity<Tourist> getTouristById(@PathVariable("id") long id) {
 		Optional<Tourist> result = this.repository.findById(id);
 
@@ -43,14 +45,14 @@ public class TouristRestController {
 		}
 	}
 	
-	@PostMapping("projectx/tourist")
+	@PostMapping("projectx/tourists")
 	public ResponseEntity<Tourist> createTourist(@RequestBody Tourist tourist) {
 		Tourist result = this.repository.save(tourist);
 		return new ResponseEntity<Tourist>(result, HttpStatus.OK);
 	}
 
 
-	@DeleteMapping("projectx/tourist/{id}")
+	@DeleteMapping("projectx/tourists/{id}")
 	void deleteTourist(@PathVariable long id) {
 		repository.deleteById(id);
 	}

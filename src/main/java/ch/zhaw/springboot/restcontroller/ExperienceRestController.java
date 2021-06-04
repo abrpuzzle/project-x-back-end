@@ -19,7 +19,7 @@ public class ExperienceRestController {
 	@Autowired
 	private ExperienceRepository repository;
 
-	@GetMapping("projectx/experience")
+	@GetMapping("projectx/experiences")
 	public ResponseEntity<List<Experience>> getExperience() {
 		List<Experience> result = this.repository.findAll();
 
@@ -30,7 +30,7 @@ public class ExperienceRestController {
 		}
 	}
 	
-	@GetMapping("projectx/experience/{id}")
+	@GetMapping("projectx/experiences/{id}")
 	public ResponseEntity<Experience> getExperienceById(@PathVariable("id") Long id) {
 		Optional<Experience> result = this.repository.findById(id);
 
